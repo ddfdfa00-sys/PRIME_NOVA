@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="html-root">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime Nova | برايم نوفا</title>
+    <!-- استيراد خطوط وآيقونات احترافية -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-card: #141414;
+            --gold: #d4af37;
+            --gold-light: #f3e5ab;
+            --gold-dark: #aa8c2c;
+            --text-light: #f5f5f5;
+            --text-gray: #aaaaaa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        /* شريط تقدم التصفح */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            z-index: 1001;
+            transition: width 0.1s;
+        }
+
+        /* شريط التنقل */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 8%;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--gold);
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span { color: var(--text-light); }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover { color: var(--gold); }
+
+        /* زر تغيير اللغة */
+        .lang-btn {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .lang-btn:hover {
+            background: var(--gold);
+            color: var(--bg-dark);
+        }
+
+        /* القسم الرئيسي (Hero) */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            background: radial-gradient(circle at center, #1c1c1c 0%, #0a0a0a 100%);
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--gold);
+            margin-bottom: 20px;
+            text-shadow: 0 0 25px rgba(212, 175, 55, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-gray);
+            max-width: 700px;
+            margin-bottom: 30px;
+        }
+
+        .badge {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--gold);
+            color: var(--gold-light);
+            padding: 8px 22px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--bg-dark);
+            padding: 12px 35px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        /* الأقسام العامة */
+        section { padding: 100px 8%; }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 60px;
+            color: var(--text-light);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--gold);
+        }
+
+        /* قسم من نحن */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            color: var(--text-gray);
+            line-height: 1.8;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .highlight-box {
+            background: var(--bg-card);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        [dir="rtl"] .highlight-box { border-right: 4px solid var(--gold); }
+        [dir="ltr"] .highlight-box { border-left: 4px solid var(--gold); }
+
+        .highlight-box h4 {
+            color: var(--gold-light);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        /* قسم الإحصائيات الأرقام */
+        .stats-section {
+            background: #0d0d0d;
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-card {
+            padding: 30px;
+            background: var(--bg-card);
+            border-radius: 12px;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .stat-card i {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+
+        .stat-card h3 {
+            font-size: 2.5rem;
+            color: var(--text-light);
+            margin-bottom: 5px;
+        }
+
+        .stat-card p {
+            color: var(--text-gray);
+            font-weight: 600;
+        }
+
+        /* الأهداف البرمجية */
+        .goals-grid, .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .goal-card, .service-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 40px 30px;
+            border-radius: 12px;
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .goal-card:hover, .service-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+        }
+
+        .goal-icon, .service-icon {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .goal-card h3, .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+
+        .goal-card p, .service-card p {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* قسم التواصل */
+        .contact-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: start;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--gold-light);
+            font-weight: 600;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            background: #0a0a0a;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 6px;
+            color: #fff;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+        }
+
+        /* زر العودة للأعلى */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: var(--gold);
+            color: var(--bg-dark);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s;
+            z-index: 999;
+        }
+
+        [dir="ltr"] .back-to-top {
+            left: auto;
+            right: 30px;
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* تذييل الصفحة */
+        footer {
+            background: #050505;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            text-align: center;
+            padding: 30px 20px;
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+
+        footer span { color: var(--gold); }
+
+        /* الشاشات الصغيرة */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.8rem; }
+            .about-content { grid-template-columns: 1fr; }
+            nav ul { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- شريط تقدم التصفح -->
+    <div class="scroll-progress" id="progressBar"></div>
+
+    <!-- زر العودة للأعلى -->
+    <div class="back-to-top" id="backToTop" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- شريط التنقل -->
+    <header>
+        <div class="logo">
+            <i class="fas fa-code"></i> PRIME <span>NOVA</span>
+        </div>
+        <div class="nav-container">
+            <nav>
+                <ul>
+                    <li><a href="#home" data-key="nav_home">الرئيسية</a></li>
+                    <li><a href="#about" data-key="nav_about">من نحن</a></li>
+                    <li><a href="#services" data-key="nav_services">مجالاتنا</a></li>
+                    <li><a href="#goals" data-key="nav_goals">أهدافنا</a></li>
+                    <li><a href="#contact" data-key="nav_contact">تواصل معنا</a></li>
+                </ul>
+            </nav>
+            <button class="lang-btn" id="langToggleBtn" onclick="toggleLanguage()">
+                <i class="fas fa-globe"></i> English
+            </button>
+        </div>
+    </header>
+
+    <!-- القسم الرئيسي -->
+    <section id="home" class="hero">
+        <div class="badge" data-key="hero_badge">مجموعة برمجية رائدة</div>
+        <h1>Prime Nova</h1>
+        <p data-key="hero_desc">نبتكر المستقبل التقني من قلب الأفكار المبدعة، لنصنع حلولاً برمجية تضيء عالم التكنولوجيا.</p>
+        <a href="#about" class="btn" data-key="hero_btn">
+            <span>اكتشف حكايتنا</span> <i class="fas fa-chevron-down"></i>
+        </a>
+    </section>
+
+    <!-- قسم من نحن -->
+    <section id="about">
+        <h2 class="section-title" data-key="about_title">حكاية نشأتنا</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <h3 data-key="about_subtitle">انطلاقة من القمة</h3>
+                <p data-key="about_p1">تأسست مجموعة <strong>Prime Nova</strong> البرمجية داخل أسوار <strong>مدرسة كريمة الثانوية</strong> على يد المبدعين <strong>عبدالله العساف</strong> و<strong>عمر حيدر</strong>، لتكون حاضنة للمواهب التقنية والعقول الشابة الطموحة.</p>
+                <p data-key="about_p2">بدأت الفكرة بشغف مشترك نحو البرمجة وتطوير الويب والتطبيقات، وتطورت لتصبح كياناً يهدف إلى تحويل الأفكار الأكاديمية إلى مشاريع برمجية حقيقية ذات أثر مجتمعي وتكنولوجي بارز.</p>
+            </div>
+            <div class="highlight-box">
+                <h4 data-key="about_box_title"><i class="fas fa-school"></i> مقر الانطلاق والمؤسسون</h4>
+                <p data-key="about_box_desc">مدرسة كريمة الثانوية - البيئة الحاضنة للإبداع والتميز العلمي والتقني، حيث وُلدت النواة الأولى لمجموعة برايم نوفا البرمجية بتأسيس الثنائي عبدالله العساف وعمر حيدر.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الإحصائيات (الأرقام) -->
+    <section class="stats-section">
+        <div class="stat-card">
+            <i class="fas fa-project-diagram"></i>
+            <h3 class="counter" data-target="15">0</h3>
+            <p data-key="stat_1">مشروع برمجي</p>
+        </div>
+        <div class="stat-card">
+            <i class="fas fa-users"></i>
+            <h3 class="counter" data-target="10">0</h3>
+            <p data-key="stat_2">عضو مبدع</p>
+        </div>
+        <div class="stat-card">
+            <i class="fas fa-code-branch"></i>
+            <h3 class="counter" data-target="50000">0</h3>
+            <p data-key="stat_3">سطر برمجي</p>
+        </div>
+    </section>
+
+    <!-- قسم الخدمات والمجالات -->
+    <section id="services">
+        <h2 class="section-title" data-key="services_title">مجالات إبداعنا</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
+                <h3 data-key="ser1_title">تطوير الويب</h3>
+                <p data-key="ser1_desc">بناء مواقع وتطبيقات ويب سريعة، متجاوبة ومميزة باستخدام أحدث التقنيات الحديثة.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
+                <h3 data-key="ser2_title">تطبيقات الهواتف</h3>
+                <p data-key="ser2_desc">تصميم وتطوير تطبيقات جوال مبتكرة توفر أفضل تجربة مستخدم سلسة وعصرية.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-lightbulb"></i></div>
+                <h3 data-key="ser3_title">الأنظمة الذكية</h3>
+                <p data-key="ser3_desc">ابتكار خوارزميات وحلول برمجية ذكية للمشكلات التكنولوجية والأكاديمية.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- الأهداف البرمجية -->
+    <section id="goals" style="background: #0f0f0f;">
+        <h2 class="section-title" data-key="goals_title">أهدافنا البرمجية</h2>
+        <div class="goals-grid">
+            <div class="goal-card">
+                <div class="goal-icon"><i class="fas fa-rocket"></i></div>
+                <h3 data-key="goal1_title">الابتكار التقني</h3>
+                <p data-key="goal1_desc">تطوير حلول برمجية مبتكرة وعصرية تلبي احتياجات المستخدمين وتحل المشكلات التقنية بكفاءة عالية.</p>
+            </div>
+            <div class="goal-card">
+                <div class="goal-icon"><i class="fas fa-graduation-cap"></i></div>
+                <h3 data-key="goal2_title">تمكين المهارات</h3>
+                <p data-key="goal2_desc">صقل مهارات أعضاء المجموعة في لغات البرمجة المختلفة وتصميم واجهات المستخدم وهندسة البرمجيات.</p>
+            </div>
+            <div class="goal-card">
+                <div class="goal-icon"><i class="fas fa-handshake"></i></div>
+                <h3 data-key="goal3_title">العمل الجماعي</h3>
+                <p data-key="goal3_desc">ترسيخ مفهوم العمل بروح الفريق الواحد وإدارة المشاريع التقنية الكبرى باحترافية وتنسيق تام.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم التواصل (تم الربط برابط إرسال إيميل مباشر) -->
+    <section id="contact">
+        <h2 class="section-title" data-key="contact_title">تواصل معنا</h2>
+        <div class="contact-container">
+            <form action="https://formspree.io/f/asaassaf3@gmail.com" method="POST" onsubmit="handleContact(event)">
+                <div class="form-group">
+                    <label data-key="form_name">الاسم كامل</label>
+                    <input type="text" name="name" required placeholder="...">
+                </div>
+                <div class="form-group">
+                    <label data-key="form_email">البريد الإلكتروني</label>
+                    <input type="email" name="email" required placeholder="...">
+                </div>
+                <div class="form-group">
+                    <label data-key="form_msg">الرسالة</label>
+                    <textarea name="message" rows="4" required placeholder="..."></textarea>
+                </div>
+                <button type="submit" class="btn" style="width:100%; justify-content:center;" data-key="form_btn">إرسال الرسالة</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- تذييل الصفحة -->
+    <footer>
+        <p data-key="footer_text">جميع الحقوق محفوظة &copy; 2026 مجموعة <span>Prime Nova</span> البرمجية - مدرسة كريمة الثانوية</p>
+    </footer>
+
+    <!-- الترجمة والبرمجة والتفاعل -->
+    <script>
+        const translations = {
+            ar: {
+                nav_home: "الرئيسية",
+                nav_about: "من نحن",
+                nav_services: "مجالاتنا",
+                nav_goals: "أهدافنا",
+                nav_contact: "تواصل معنا",
+                hero_badge: "مجموعة برمجية رائدة",
+                hero_desc: "نبتكر المستقبل التقني من قلب الأفكار المبدعة، لنصنع حلولاً برمجية تضيء عالم التكنولوجيا.",
+                hero_btn: "اكتشف حكايتنا",
+                about_title: "حكاية نشأتنا",
+                about_subtitle: "انطلاقة من القمة",
+                about_p1: "تأسست مجموعة <strong>Prime Nova</strong> البرمجية داخل أسوار <strong>مدرسة كريمة الثانوية</strong> على يد المبدعين <strong>عبدالله العساف</strong> و<strong>عمر حيدر</strong>، لتكون حاضنة للمواهب التقنية والعقول الشابة الطموحة.",
+                about_p2: "بدأت الفكرة بشغف مشترك نحو البرمجة وتطوير الويب والتطبيقات، وتطورت لتصبح كياناً يهدف إلى تحويل الأفكار الأكاديمية إلى مشاريع برمجية حقيقية ذات أثر مجتمعي وتكنولوجي بارز.",
+                about_box_title: "مقر الانطلاق والمؤسسون",
+                about_box_desc: "مدرسة كريمة الثانوية - البيئة الحاضنة للإبداع والتميز العلمي والتقني، حيث وُلدت النواة الأولى لمجموعة برايم نوفا البرمجية بتأسيس الثنائي عبدالله العساف وعمر حيدر.",
+                stat_1: "مشروع برمجي",
+                stat_2: "عضو مبدع",
+                stat_3: "سطر برمجي",
+                services_title: "مجالات إبداعنا",
+                ser1_title: "تطوير الويب",
+                ser1_desc: "بناء مواقع وتطبيقات ويب سريعة، متجاوبة ومميزة باستخدام أحدث التقنيات الحديثة.",
+                ser2_title: "تطبيقات الهواتف",
+                ser2_desc: "تصميم وتطوير تطبيقات جوال مبتكرة توفر أفضل تجربة مستخدم سلسة وعصرية.",
+                ser3_title: "الأنظمة الذكية",
+                ser3_desc: "ابتكار خوارزميات وحلول برمجية ذكية للمشكلات التكنولوجية والأكاديمية.",
+                goals_title: "أهدافنا البرمجية",
+                goal1_title: "الابتكار التقني",
+                goal1_desc: "تطوير حلول برمجية مبتكرة وعصرية تلبي احتياجات المستخدمين وتحل المشكلات التقنية بكفاءة عالية.",
+                goal2_title: "تمكين المهارات",
+                goal2_desc: "صقل مهارات أعضاء المجموعة في لغات البرمجة المختلفة وتصميم واجهات المستخدم وهندسة البرمجيات.",
+                goal3_title: "العمل الجماعي",
+                goal3_desc: "ترسيخ مفهوم العمل بروح الفريق الواحد وإدارة المشاريع التقنية الكبرى باحترافية وتنسيق تام.",
+                contact_title: "تواصل معنا",
+                form_name: "الاسم كامل",
+                form_email: "البريد الإلكتروني",
+                form_msg: "الرسالة",
+                form_btn: "إرسال الرسالة",
+                footer_text: "جميع الحقوق محفوظة &copy; 2026 مجموعة <span>Prime Nova</span> البرمجية - مدرسة كريمة الثانوية"
+            },
+            en: {
+                nav_home: "Home",
+                nav_about: "About Us",
+                nav_services: "Services",
+                nav_goals: "Our Goals",
+                nav_contact: "Contact",
+                hero_badge: "Leading Software Group",
+                hero_desc: "Innovating the tech future from creative ideas to build software solutions that illuminate the tech world.",
+                hero_btn: "Discover Our Story",
+                about_title: "Our Origin Story",
+                about_subtitle: "Starting from the Top",
+                about_p1: "The <strong>Prime Nova</strong> software group was founded within the walls of <strong>Kariema Secondary School</strong> by <strong>Abdullah Al-Assaf</strong> and <strong>Omar Haidar</strong>, serving as an incubator for tech talent and ambitious young minds.",
+                about_p2: "The idea started with a shared passion for programming, web, and app development, evolving into an entity dedicated to turning academic concepts into real-world software projects.",
+                about_box_title: "Launch HQ & Founders",
+                about_box_desc: "Kariema Secondary School - The nurturing environment for creativity, where Prime Nova was founded by Abdullah Al-Assaf and Omar Haidar.",
+                stat_1: "Software Projects",
+                stat_2: "Creative Members",
+                stat_3: "Lines of Code",
+                services_title: "Our Expertise",
+                ser1_title: "Web Development",
+                ser1_desc: "Building fast, responsive, and unique web applications using modern technology.",
+                ser2_title: "Mobile Apps",
+                ser2_desc: "Designing and developing innovative mobile apps providing a seamless user experience.",
+                ser3_title: "Smart Systems",
+                ser3_desc: "Creating algorithms and smart tech solutions for complex technical problems.",
+                goals_title: "Our Goals",
+                goal1_title: "Technical Innovation",
+                goal1_desc: "Developing modern software solutions meeting user needs efficiently.",
+                goal2_title: "Skills Empowerment",
+                goal2_desc: "Honing members' skills in software engineering and UI/UX design.",
+                goal3_title: "Teamwork",
+                goal3_desc: "Instilling teamwork to manage major tech projects professionally.",
+                contact_title: "Contact Us",
+                form_name: "Full Name",
+                form_email: "Email Address",
+                form_msg: "Message",
+                form_btn: "Send Message",
+                footer_text: "All Rights Reserved &copy; 2026 <span>Prime Nova</span> Group - Kariema Secondary School"
+            }
+        };
+
+        let currentLang = 'ar';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+            const htmlRoot = document.getElementById('html-root');
+            const langBtn = document.getElementById('langToggleBtn');
+
+            htmlRoot.setAttribute('lang', currentLang);
+            htmlRoot.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+            
+            langBtn.innerHTML = `<i class="fas fa-globe"></i> ${currentLang === 'ar' ? 'English' : 'عربي'}`;
+
+            document.querySelectorAll('[data-key]').forEach(element => {
+                const key = element.getAttribute('data-key');
+                if (translations[currentLang][key]) {
+                    element.innerHTML = translations[currentLang][key];
+                }
+            });
+        }
+
+        // شريط تقدم التصفح + زر الذهاب للأعلى
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("progressBar").style.width = scrolled + "%";
+
+            const backToTop = document.getElementById("backToTop");
+            if (winScroll > 300) {
+                backToTop.classList.add("active");
+            } else {
+                backToTop.classList.remove("active");
+            }
+        };
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // حركة العداد التفاعلي (Counters)
+        const counters = document.querySelectorAll('.counter');
+        let counterStarted = false;
+
+        window.addEventListener('scroll', () => {
+            const statsSec = document.querySelector('.stats-section');
+            if(!statsSec) return;
+            const position = statsSec.getBoundingClientRect().top;
+            const screenPosition = window.innerHeight;
+
+            if(position < screenPosition && !counterStarted) {
+                counters.forEach(counter => {
+                    const target = +counter.getAttribute('data-target');
+                    const speed = target / 50;
+                    const updateCount = () => {
+                        const count = +counter.innerText;
+                        if(count < target) {
+                            counter.innerText = Math.ceil(count + speed);
+                            setTimeout(updateCount, 40);
+                        } else {
+                            counter.innerText = target.toLocaleString();
+                        }
+                    };
+                    updateCount();
+                });
+                counterStarted = true;
+            }
+        });
+
+        // إرسال النموذج باستخدام AJAX لمنع إعادة تحميل الصفحة
+        async function handleContact(e) {
+            e.preventDefault();
+            const form = e.target;
+            const data = new FormData(form);
+            const button = form.querySelector('button[type="submit"]');
+            
+            button.disabled = true;
+            button.innerText = currentLang === 'ar' ? 'جاري الإرسال...' : 'Sending...';
+
+            try {
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    body: data,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    alert(currentLang === 'ar' ? 'شكراً لتواصلك! تم إرسال رسالتك بنجاح.' : 'Thank you! Your message has been sent.');
+                    form.reset();
+                } else {
+                    alert(currentLang === 'ar' ? 'حدث خطأ أثناء الإرسال. يُرجى المحاولة لاحقاً.' : 'An error occurred. Please try again later.');
+                }
+            } catch (error) {
+                alert(currentLang === 'ar' ? 'حدث خطأ في الاتصال. حاول مرة أخرى.' : 'Connection error. Please try again.');
+            } finally {
+                button.disabled = false;
+                button.innerText = translations[currentLang]['form_btn'];
+            }
+        }
+    </script>
+</body>
+</html>
