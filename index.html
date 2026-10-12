@@ -69,6 +69,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            text-decoration: none;
         }
 
         .logo span { color: var(--text-light); }
@@ -82,13 +83,14 @@
         nav ul {
             display: flex;
             list-style: none;
-            gap: 25px;
+            gap: 20px;
         }
 
         nav ul li a {
             text-decoration: none;
             color: var(--text-light);
             font-weight: 600;
+            font-size: 0.95rem;
             transition: 0.3s;
         }
 
@@ -269,14 +271,14 @@
             font-weight: 600;
         }
 
-        /* الأهداف البرمجية */
-        .goals-grid, .services-grid {
+        /* الأهداف، المجالات، والمشاريع */
+        .goals-grid, .services-grid, .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
         }
 
-        .goal-card, .service-card {
+        .goal-card, .service-card, .project-card {
             background: var(--bg-card);
             border: 1px solid rgba(212, 175, 55, 0.2);
             padding: 40px 30px;
@@ -285,28 +287,73 @@
             text-align: center;
         }
 
-        .goal-card:hover, .service-card:hover {
+        .goal-card:hover, .service-card:hover, .project-card:hover {
             border-color: var(--gold);
             transform: translateY(-5px);
             box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
         }
 
-        .goal-icon, .service-icon {
+        .goal-icon, .service-icon, .project-icon {
             font-size: 2.5rem;
             color: var(--gold);
             margin-bottom: 20px;
         }
 
-        .goal-card h3, .service-card h3 {
+        .goal-card h3, .service-card h3, .project-card h3 {
             font-size: 1.3rem;
             margin-bottom: 15px;
             color: var(--text-light);
         }
 
-        .goal-card p, .service-card p {
+        .goal-card p, .service-card p, .project-card p {
             color: var(--text-gray);
             font-size: 0.95rem;
             line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .project-tag {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.15);
+            color: var(--gold);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* قسم الشروط وحقوق الملكية الفكرية */
+        .terms-container {
+            background: var(--bg-card);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 40px;
+            border-radius: 12px;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: start;
+        }
+
+        .terms-container h3 {
+            color: var(--gold);
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .terms-container p, .terms-container li {
+            color: var(--text-gray);
+            line-height: 1.7;
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        .terms-container ul {
+            padding-right: 20px;
+        }
+
+        [dir="ltr"] .terms-container ul {
+            padding-right: 0;
+            padding-left: 20px;
         }
 
         /* قسم التواصل */
@@ -410,16 +457,18 @@
 
     <!-- شريط التنقل -->
     <header>
-        <div class="logo">
+        <a href="#home" class="logo">
             <i class="fas fa-code"></i> PRIME <span>NOVA</span>
-        </div>
+        </a>
         <div class="nav-container">
             <nav>
                 <ul>
                     <li><a href="#home" data-key="nav_home">الرئيسية</a></li>
                     <li><a href="#about" data-key="nav_about">من نحن</a></li>
                     <li><a href="#services" data-key="nav_services">مجالاتنا</a></li>
+                    <li><a href="#projects" data-key="nav_projects">مشاريعنا</a></li>
                     <li><a href="#goals" data-key="nav_goals">أهدافنا</a></li>
+                    <li><a href="#terms" data-key="nav_terms">حقوق الملكية</a></li>
                     <li><a href="#contact" data-key="nav_contact">تواصل معنا</a></li>
                 </ul>
             </nav>
@@ -459,8 +508,8 @@
     <section class="stats-section">
         <div class="stat-card">
             <i class="fas fa-project-diagram"></i>
-            <h3 class="counter" data-target="15">0</h3>
-            <p data-key="stat_1">مشروع برمجي</p>
+            <h3 class="counter" data-target="24">0</h3>
+            <p data-key="stat_1">مشروع مبتكر</p>
         </div>
         <div class="stat-card">
             <i class="fas fa-users"></i>
@@ -479,25 +528,50 @@
         <h2 class="section-title" data-key="services_title">مجالات إبداعنا</h2>
         <div class="services-grid">
             <div class="service-card">
-                <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
-                <h3 data-key="ser1_title">تطوير الويب</h3>
-                <p data-key="ser1_desc">بناء مواقع وتطبيقات ويب سريعة، متجاوبة ومميزة باستخدام أحدث التقنيات الحديثة.</p>
+                <div class="service-icon"><i class="fas fa-heartbeat"></i></div>
+                <h3 data-key="ser1_title">القطاع الطبي والصحي</h3>
+                <p data-key="ser1_desc">مشاريع متقدمة للرعاية الصحية ومراقبة العلامات الحيوية وأنظمة الطوارئ الذكية.</p>
             </div>
             <div class="service-card">
-                <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
-                <h3 data-key="ser2_title">تطبيقات الهواتف</h3>
-                <p data-key="ser2_desc">تصميم وتطوير تطبيقات جوال مبتكرة توفر أفضل تجربة مستخدم سلسة وعصرية.</p>
+                <div class="service-icon"><i class="fas fa-seedling"></i></div>
+                <h3 data-key="ser2_title">الزراعة الذكية والبيئة</h3>
+                <p data-key="ser2_desc">أنظمة ري أوتوماتيكية ومراقبة للمحاصيل باستخدام إنترنت الأشياء والذكاء الاصطناعي.</p>
             </div>
             <div class="service-card">
-                <div class="service-icon"><i class="fas fa-lightbulb"></i></div>
-                <h3 data-key="ser3_title">الأنظمة الذكية</h3>
-                <p data-key="ser3_desc">ابتكار خوارزميات وحلول برمجية ذكية للمشكلات التكنولوجية والأكاديمية.</p>
+                <div class="service-icon"><i class="fas fa-bolt"></i></div>
+                <h3 data-key="ser3_title">إدارة الطاقة والموارد</h3>
+                <p data-key="ser3_desc">حلول ذكية لترشيد استهلاك الكهرباء والمياه ومراقبة كفاءة الطاقة المنزلية والمجتمعية.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم مشاريعنا المميزة -->
+    <section id="projects" style="background: #0d0d0d;">
+        <h2 class="section-title" data-key="projects_title">مشاريعنا المميزة</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-icon"><i class="fas fa-plug"></i></div>
+                <h3 data-key="proj1_title">مراقب استهلاك الكهرباء الذكي</h3>
+                <p data-key="proj1_desc">نظام متكامل لقراءة الاستهلاك اللحظي للطاقة المنزلية عبر لوحة تحكم تفاعلية وحساسات ESP32.</p>
+                <span class="project-tag" data-key="proj1_tag">قطاع الطاقة</span>
+            </div>
+            <div class="project-card">
+                <div class="project-icon"><i class="fas fa-tint"></i></div>
+                <h3 data-key="proj2_title">نظام كشف تسريبات المياه</h3>
+                <p data-key="proj2_desc">حساسات ذكية ترافق تدفق المياه لإنذار المستخدم فوراً عند حدوث أي هدر أو تسريب خفي.</p>
+                <span class="project-tag" data-key="proj2_tag">إدارة الموارد</span>
+            </div>
+            <div class="project-card">
+                <div class="project-icon"><i class="fas fa-graduation-cap"></i></div>
+                <h3 data-key="proj3_title">الصف الذكي وإدارة المناهج</h3>
+                <p data-key="proj3_desc">منصة تفاعلية مخصصة للمدارس لتنظيم المشاريع الطلابية وتقديم الواجبات والاختبارات الذكية.</p>
+                <span class="project-tag" data-key="proj3_tag">القطاع التعليمي</span>
             </div>
         </div>
     </section>
 
     <!-- الأهداف البرمجية -->
-    <section id="goals" style="background: #0f0f0f;">
+    <section id="goals">
         <h2 class="section-title" data-key="goals_title">أهدافنا البرمجية</h2>
         <div class="goals-grid">
             <div class="goal-card">
@@ -518,7 +592,25 @@
         </div>
     </section>
 
-    <!-- قسم التواصل (تم الربط برابط إرسال إيميل مباشر) -->
+    <!-- قسم الشروط وحقوق الملكية الفكرية -->
+    <section id="terms" style="background: #0f0f0f;">
+        <h2 class="section-title" data-key="terms_title">شروط الاستخدام وحقوق الملكية</h2>
+        <div class="terms-container">
+            <h3 data-key="terms_h1">1. حقوق الملكية الفكرية</h3>
+            <p data-key="terms_p1">جميع الحقوق محفوظة ومملوكة لمجموعة <strong>Prime Nova</strong> البرمجية. تشمل هذه الحقوق كافة الأكواد البرمجية، التصاميم، المستندات، والأفكار المعروضة في هذا الموقع ومشاريعنا الموثقة.</p>
+            
+            <h3 data-key="terms_h2">2. الاستخدام المسموح به</h3>
+            <ul>
+                <li data-key="terms_li1">يُسمح بالاطلاع على المشاريع والأفكار لأغراض التعليم والتقييم الأكاديمي والتقني.</li>
+                <li data-key="terms_li2">يُمنع منعاً باتاً نسخ أو إعادة نشر أو استغلال الأكواد أو التصاميم لأغراض تجارية دون إذن كتابي رسمي من إدارة مجموعة Prime Nova.</li>
+            </ul>
+
+            <h3 data-key="terms_h3">3. سياسة الخصوصية</h3>
+            <p data-key="terms_p3">نحن نلتزم بحماية خصوصية الزوار وأي بيانات تُرسل عبر نماذج التواصل، ولا يتم مشاركتها مطلقاً مع أي جهات خارجية.</p>
+        </div>
+    </section>
+
+    <!-- قسم التواصل (تم الربط وإصلاح الإرسال بالكامل) -->
     <section id="contact">
         <h2 class="section-title" data-key="contact_title">تواصل معنا</h2>
         <div class="contact-container">
@@ -542,7 +634,7 @@
 
     <!-- تذييل الصفحة -->
     <footer>
-        <p data-key="footer_text">جميع الحقوق محفوظة &copy; 2026 مجموعة <span>Prime Nova</span> البرمجية - مدرسة كريمة الثانوية</p>
+        <p data-key="footer_text">جميع الحقوق محفوظة ومملوكة لمجموعة <span>Prime Nova</span> البرمجية &copy; 2026 - مدرسة كريمة الثانوية</p>
     </footer>
 
     <!-- الترجمة والبرمجة والتفاعل -->
@@ -552,7 +644,9 @@
                 nav_home: "الرئيسية",
                 nav_about: "من نحن",
                 nav_services: "مجالاتنا",
+                nav_projects: "مشاريعنا",
                 nav_goals: "أهدافنا",
+                nav_terms: "حقوق الملكية",
                 nav_contact: "تواصل معنا",
                 hero_badge: "مجموعة برمجية رائدة",
                 hero_desc: "نبتكر المستقبل التقني من قلب الأفكار المبدعة، لنصنع حلولاً برمجية تضيء عالم التكنولوجيا.",
@@ -563,16 +657,26 @@
                 about_p2: "بدأت الفكرة بشغف مشترك نحو البرمجة وتطوير الويب والتطبيقات، وتطورت لتصبح كياناً يهدف إلى تحويل الأفكار الأكاديمية إلى مشاريع برمجية حقيقية ذات أثر مجتمعي وتكنولوجي بارز.",
                 about_box_title: "مقر الانطلاق والمؤسسون",
                 about_box_desc: "مدرسة كريمة الثانوية - البيئة الحاضنة للإبداع والتميز العلمي والتقني، حيث وُلدت النواة الأولى لمجموعة برايم نوفا البرمجية بتأسيس الثنائي عبدالله العساف وعمر حيدر.",
-                stat_1: "مشروع برمجي",
+                stat_1: "مشروع مبتكر",
                 stat_2: "عضو مبدع",
                 stat_3: "سطر برمجي",
                 services_title: "مجالات إبداعنا",
-                ser1_title: "تطوير الويب",
-                ser1_desc: "بناء مواقع وتطبيقات ويب سريعة، متجاوبة ومميزة باستخدام أحدث التقنيات الحديثة.",
-                ser2_title: "تطبيقات الهواتف",
-                ser2_desc: "تصميم وتطوير تطبيقات جوال مبتكرة توفر أفضل تجربة مستخدم سلسة وعصرية.",
-                ser3_title: "الأنظمة الذكية",
-                ser3_desc: "ابتكار خوارزميات وحلول برمجية ذكية للمشكلات التكنولوجية والأكاديمية.",
+                ser1_title: "القطاع الطبي والصحي",
+                ser1_desc: "مشاريع متقدمة للرعاية الصحية ومراقبة العلامات الحيوية وأنظمة الطوارئ الذكية.",
+                ser2_title: "الزراعة الذكية والبيئة",
+                ser2_desc: "أنظمة ري أوتوماتيكية ومراقبة للمحاصيل باستخدام إنترنت الأشياء والذكاء الاصطناعي.",
+                ser3_title: "إدارة الطاقة والموارد",
+                ser3_desc: "حلول ذكية لترشيد استهلاك الكهرباء والمياه ومراقبة كفاءة الطاقة المنزلية والمجتمعية.",
+                projects_title: "مشاريعنا المميزة",
+                proj1_title: "مراقب استهلاك الكهرباء الذكي",
+                proj1_desc: "نظام متكامل لقراءة الاستهلاك اللحظي للطاقة المنزلية عبر لوحة تحكم تفاعلية وحساسات ESP32.",
+                proj1_tag: "قطاع الطاقة",
+                proj2_title: "نظام كشف تسريبات المياه",
+                proj2_desc: "حساسات ذكية ترافق تدفق المياه لإنذار المستخدم فوراً عند حدوث أي هدر أو تسريب خفي.",
+                proj2_tag: "إدارة الموارد",
+                proj3_title: "الصف الذكي وإدارة المناهج",
+                proj3_desc: "منصة تفاعلية مخصصة للمدارس لتنظيم المشاريع الطلابية وتقديم الواجبات والاختبارات الذكية.",
+                proj3_tag: "القطاع التعليمي",
                 goals_title: "أهدافنا البرمجية",
                 goal1_title: "الابتكار التقني",
                 goal1_desc: "تطوير حلول برمجية مبتكرة وعصرية تلبي احتياجات المستخدمين وتحل المشكلات التقنية بكفاءة عالية.",
@@ -580,18 +684,28 @@
                 goal2_desc: "صقل مهارات أعضاء المجموعة في لغات البرمجة المختلفة وتصميم واجهات المستخدم وهندسة البرمجيات.",
                 goal3_title: "العمل الجماعي",
                 goal3_desc: "ترسيخ مفهوم العمل بروح الفريق الواحد وإدارة المشاريع التقنية الكبرى باحترافية وتنسيق تام.",
+                terms_title: "شروط الاستخدام وحقوق الملكية",
+                terms_h1: "1. حقوق الملكية الفكرية",
+                terms_p1: "جميع الحقوق محفوظة ومملوكة لمجموعة <strong>Prime Nova</strong> البرمجية. تشمل هذه الحقوق كافة الأكواد البرمجية، التصاميم، المستندات، والأفكار المعروضة في هذا الموقع ومشاريعنا الموثقة.",
+                terms_h2: "2. الاستخدام المسموح به",
+                terms_li1: "يُسمح بالاطلاع على المشاريع والأفكار لأغراض التعليم والتقييم الأكاديمي والتقني.",
+                terms_li2: "يُمنع منعاً باتاً نسخ أو إعادة نشر أو استغلال الأكواد أو التصاميم لأغراض تجارية دون إذن كتابي رسمي من إدارة مجموعة Prime Nova.",
+                terms_h3: "3. سياسة الخصوصية",
+                terms_p3: "نحن نلتزم بحماية خصوصية الزوار وأي بيانات تُرسل عبر نماذج التواصل، ولا يتم مشاركتها مطلقاً مع أي جهات خارجية.",
                 contact_title: "تواصل معنا",
                 form_name: "الاسم كامل",
                 form_email: "البريد الإلكتروني",
                 form_msg: "الرسالة",
                 form_btn: "إرسال الرسالة",
-                footer_text: "جميع الحقوق محفوظة &copy; 2026 مجموعة <span>Prime Nova</span> البرمجية - مدرسة كريمة الثانوية"
+                footer_text: "جميع الحقوق محفوظة ومملوكة لمجموعة <span>Prime Nova</span> البرمجية &copy; 2026 - مدرسة كريمة الثانوية"
             },
             en: {
                 nav_home: "Home",
                 nav_about: "About Us",
                 nav_services: "Services",
+                nav_projects: "Projects",
                 nav_goals: "Our Goals",
+                nav_terms: "Copyright",
                 nav_contact: "Contact",
                 hero_badge: "Leading Software Group",
                 hero_desc: "Innovating the tech future from creative ideas to build software solutions that illuminate the tech world.",
@@ -602,16 +716,26 @@
                 about_p2: "The idea started with a shared passion for programming, web, and app development, evolving into an entity dedicated to turning academic concepts into real-world software projects.",
                 about_box_title: "Launch HQ & Founders",
                 about_box_desc: "Kariema Secondary School - The nurturing environment for creativity, where Prime Nova was founded by Abdullah Al-Assaf and Omar Haidar.",
-                stat_1: "Software Projects",
+                stat_1: "Innovative Projects",
                 stat_2: "Creative Members",
                 stat_3: "Lines of Code",
                 services_title: "Our Expertise",
-                ser1_title: "Web Development",
-                ser1_desc: "Building fast, responsive, and unique web applications using modern technology.",
-                ser2_title: "Mobile Apps",
-                ser2_desc: "Designing and developing innovative mobile apps providing a seamless user experience.",
-                ser3_title: "Smart Systems",
-                ser3_desc: "Creating algorithms and smart tech solutions for complex technical problems.",
+                ser1_title: "Medical & Health Sector",
+                ser1_desc: "Advanced healthcare projects, vital signs monitoring, and smart emergency systems.",
+                ser2_title: "Smart Agriculture",
+                ser2_desc: "Automated irrigation and crop monitoring systems using IoT and AI.",
+                ser3_title: "Energy & Resource Mgmt",
+                ser3_desc: "Smart solutions for rationalizing electricity and water consumption.",
+                projects_title: "Featured Projects",
+                proj1_title: "Smart Power Monitor",
+                proj1_desc: "Integrated system for real-time power consumption tracking via interactive dashboards and ESP32.",
+                proj1_tag: "Energy Sector",
+                proj2_title: "Water Leak Detector",
+                proj2_desc: "Smart sensors tracking water flow to instantly alert users upon detecting hidden leaks or waste.",
+                proj2_tag: "Resources",
+                proj3_title: "Smart Classroom & LMS",
+                proj3_desc: "Interactive school platform for managing student projects, assignments, and smart testing.",
+                proj3_tag: "Education",
                 goals_title: "Our Goals",
                 goal1_title: "Technical Innovation",
                 goal1_desc: "Developing modern software solutions meeting user needs efficiently.",
@@ -619,12 +743,20 @@
                 goal2_desc: "Honing members' skills in software engineering and UI/UX design.",
                 goal3_title: "Teamwork",
                 goal3_desc: "Instilling teamwork to manage major tech projects professionally.",
+                terms_title: "Terms & Intellectual Property",
+                terms_h1: "1. Intellectual Property Rights",
+                terms_p1: "All rights reserved and owned by <strong>Prime Nova</strong> software group. This includes all source codes, designs, documents, and ideas presented on this website.",
+                terms_h2: "2. Permitted Use",
+                terms_li1: "Viewing projects and ideas is permitted for educational and academic evaluation purposes only.",
+                terms_li2: "Copying, republishing, or exploiting codes or designs for commercial purposes without formal written permission is strictly prohibited.",
+                terms_h3: "3. Privacy Policy",
+                terms_p3: "We are committed to protecting visitor privacy and any data submitted via contact forms is never shared with third parties.",
                 contact_title: "Contact Us",
                 form_name: "Full Name",
                 form_email: "Email Address",
                 form_msg: "Message",
                 form_btn: "Send Message",
-                footer_text: "All Rights Reserved &copy; 2026 <span>Prime Nova</span> Group - Kariema Secondary School"
+                footer_text: "All Rights Reserved & Owned by <span>Prime Nova</span> Group &copy; 2026 - Kariema Secondary School"
             }
         };
 
@@ -696,7 +828,7 @@
             }
         });
 
-        // إرسال النموذج باستخدام AJAX لمنع إعادة تحميل الصفحة
+        // إرسال النموذج عبر Formspree بنجاح
         async function handleContact(e) {
             e.preventDefault();
             const form = e.target;
@@ -716,13 +848,13 @@
                 });
 
                 if (response.ok) {
-                    alert(currentLang === 'ar' ? 'شكراً لتواصلك! تم إرسال رسالتك بنجاح.' : 'Thank you! Your message has been sent.');
+                    alert(currentLang === 'ar' ? 'شكراً لتواصلك! تم إرسال رسالتك بنجاح إلى مجموعة Prime Nova.' : 'Thank you! Your message has been successfully sent to Prime Nova.');
                     form.reset();
                 } else {
-                    alert(currentLang === 'ar' ? 'حدث خطأ أثناء الإرسال. يُرجى المحاولة لاحقاً.' : 'An error occurred. Please try again later.');
+                    alert(currentLang === 'ar' ? 'حدث خطأ أثناء الإرسال. يُرجى التحقق من إعدادات البريد.' : 'An error occurred while sending. Please check email settings.');
                 }
             } catch (error) {
-                alert(currentLang === 'ar' ? 'حدث خطأ في الاتصال. حاول مرة أخرى.' : 'Connection error. Please try again.');
+                alert(currentLang === 'ar' ? 'حدث خطأ في الاتصال بالشبكة. حاول مرة أخرى.' : 'Network connection error. Please try again.');
             } finally {
                 button.disabled = false;
                 button.innerText = translations[currentLang]['form_btn'];
